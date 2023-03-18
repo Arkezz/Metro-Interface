@@ -26,7 +26,7 @@
         const message = await resetPassword(resetToken, resetPassword1);
         resetMessage = message;
       } catch (error) {
-        resetMessage = error.response.data.message;
+        resetMessage = error.response?.data
       }
     };
   </script>
