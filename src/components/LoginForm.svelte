@@ -10,7 +10,7 @@
         const token = await loginUser(email, password);
         message = `Logged in successfully! Token: ${token}`;
       } catch (error) {
-        message = error.response.data.message;
+        message = error.response?.data || "Something went wrong. Please try again later.";
       }
     };
   </script>

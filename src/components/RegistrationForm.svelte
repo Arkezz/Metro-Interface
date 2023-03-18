@@ -10,7 +10,8 @@
         const token = await registerUser(email, password);
         message = `Registered successfully! Token: ${token}`;
       } catch (error) {
-        message = error.response.data.message;
+        console.log(error.response.data)
+        message = error.response?.data || "Something went wrong. Please try again later.";
       }
     };
   </script>

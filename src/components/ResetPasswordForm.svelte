@@ -13,7 +13,7 @@
         const message = await requestPasswordReset(email);
         requestMessage = message;
       } catch (error) {
-        requestMessage = error.response.data.message;
+        requestMessage = error.response?.data || "Something went wrong. Please try again later.";
       }
     };
     
