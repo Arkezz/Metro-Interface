@@ -1,15 +1,3 @@
-<script>
-    import Registration from "../components/RegistrationForm.svelte";
-    import Login from "../components/LoginForm.svelte";
-    import ResetPassword from "../components/ResetPasswordForm.svelte";
-  </script>
-  
-  
-  <Registration />
-  
-
-  <Login />
-
-  <ResetPassword />
-  
-  
+<a href="/login">Login</a>
+<a href="/register">Register</a>
+<a href="/password-reset">Reset Password</a>
