@@ -2,12 +2,14 @@
   import { registerUser } from "../../api.js";
 
   let email = "";
+  let username = "";
   let password = "";
   let message = "";
 
   const handleRegister = async () => {
     try {
-      const token = await registerUser(email, password);
+      const token = await registerUser(email, password, username);
+      console.log(email, password, username, token);
       message = `Registered successfully! Token: ${token}`;
     } catch (error) {
       console.log(error.response.data);
@@ -18,6 +20,10 @@
 </script>
 
 <h1>Registration</h1>
+<label>
+  Username:
+  <input type="text" bind:value={username} />
+</label>
 <label>
   Email:
   <input type="email" bind:value={email} />
@@ -40,7 +46,8 @@
     font-weight: bold;
   }
   input[type="email"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="text"] {
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;

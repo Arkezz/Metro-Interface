@@ -1,5 +1,6 @@
 <script>
-  import { loginUser } from "../../api.js";
+  import { loginUser, getUserInfo } from "../../api.js";
+  import { setAuthToken, setUserProfile } from "../../store.js";
 
   let email = "";
   let password = "";
@@ -8,7 +9,10 @@
   const handleLogin = async () => {
     try {
       const token = await loginUser(email, password);
-      message = `Logged in successfully! Token: ${token}`;
+      setAuthToken(token);
+      const user = await getUserInfo(token);
+      setUserProfile(user);
+      message = `Logged in successfully! Welcome ${user.username}`;
     } catch (error) {
       message =
         error.response?.data || "Something went wrong. Please try again later.";
