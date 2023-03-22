@@ -1,3 +1,7 @@
+<script>
+  import { isLoggedIn } from "../store.js";
+</script>
+
 <div class="hero">
   <a href="/">Home</a>
   <a href="/admin">Admin Page</a>
@@ -5,9 +9,13 @@
     <button class="dropbtn"><img src="profile.png" alt="Profile Icon" /></button
     >
     <div class="dropdown-content">
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-      <a href="/password-reset">Reset Password</a>
+      {#if $isLoggedIn}
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      {:else}
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+      {/if}
     </div>
   </div>
 </div>

@@ -19,56 +19,97 @@
   };
 </script>
 
-<h1>Registration</h1>
-<label>
-  Username:
-  <input type="text" bind:value={username} />
-</label>
-<label>
-  Email:
-  <input type="email" bind:value={email} />
-</label>
-<label>
-  Password:
-  <input type="password" bind:value={password} />
-</label>
-<button on:click={handleRegister}>Register</button>
-<p>{message}</p>
+<div class="register-form">
+  <h1>Registration</h1>
+  <form>
+    <div class="form-field">
+      <label for="username">Username:</label>
+      <input type="text" id="username" bind:value={username} />
+    </div>
+    <div class="form-field">
+      <label for="email">Email:</label>
+      <input type="email" id="email" bind:value={email} />
+    </div>
+    <div class="form-field">
+      <label for="password">Password:</label>
+      <input type="password" id="password" bind:value={password} />
+    </div>
+    <div class="form-field">
+      <button on:click={handleRegister}>Register</button>
+    </div>
+  </form>
+  <div class="form-message">
+    <p>{message}</p>
+  </div>
+  <div class="form-options">
+    <a href="/login">Already have an account? Login here</a>
+  </div>
+</div>
 
 <style>
-  h1 {
-    font-size: 24px;
-    margin-bottom: 16px;
+  .register-form {
+    max-width: 400px;
+    margin: 0 auto;
   }
-  label {
+
+  .register-form h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form-field {
+    margin-bottom: 1rem;
+  }
+
+  .form-field label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
   }
-  input[type="email"],
-  input[type="password"],
-  input[type="text"] {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 16px;
+
+  .form-field input[type="text"],
+  .form-field input[type="email"],
+  .form-field input[type="password"] {
+    display: block;
     width: 100%;
-    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
   }
-  button {
-    background-color: #007bff;
+
+  .form-field button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: #4caf50;
     color: #fff;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
   }
-  button:hover {
-    background-color: #0062cc;
+
+  .form-message {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #ff0000;
   }
-  p {
-    margin-top: 16px;
-    color: #dc3545;
-    font-weight: bold;
+
+  .form-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .form-options a {
+    color: #4caf50;
+    text-decoration: none;
+  }
+
+  .form-options a:hover {
+    text-decoration: underline;
   }
 </style>

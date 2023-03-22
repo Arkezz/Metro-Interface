@@ -34,22 +34,49 @@
 
 <h1>Reset Password</h1>
 <label>
-  Email:
+  <span>Email:</span>
   <input type="email" bind:value={email} />
 </label>
 <button on:click={handleResetRequest}>Request Reset</button>
 <p>{requestMessage}</p>
 <label>
-  Token:
+  <span>Token:</span>
   <input type="text" bind:value={resetToken} />
 </label>
 <label>
-  New Password:
+  <span>New Password:</span>
   <input type="password" bind:value={resetPassword1} />
 </label>
 <label>
-  Confirm New Password:
+  <span>Confirm New Password:</span>
   <input type="password" bind:value={resetPassword2} />
 </label>
 <button on:click={handleReset}>Reset Password</button>
 <p>{resetMessage}</p>
+
+<style>
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid gray;
+  }
+
+  button {
+    background-color: blue;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  p {
+    margin-top: 1rem;
+  }
+</style>
