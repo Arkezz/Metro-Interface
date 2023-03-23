@@ -6,6 +6,18 @@
   let password = "";
   let message = "";
   let isLoading = false;
+  let isPasswordValid = false;
+
+  const handlePasswordInput = (event) => {
+    const { value } = event.target;
+    if (value.length >= 8) {
+      isPasswordValid = true;
+      event.target.style.borderColor = "green";
+    } else {
+      isPasswordValid = false;
+      event.target.style.borderColor = "#ccc";
+    }
+  };
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -38,16 +50,20 @@
     </div>
     <div class="form-field">
       <label for="password">Password:</label>
-      <input type="password" id="password" bind:value={password} />
+      <input
+        type="password"
+        id="password"
+        bind:value={password}
+        on:input={handlePasswordInput}
+        style:borderColor={isPasswordValid ? "green" : "#ccc"}
+      />
     </div>
     <div class="form-field">
-      <button disabled={isLoading}
-        >{isLoading ? "Logging in..." : "Login"}</button
-      >
+      <button disabled={isLoading || !isPasswordValid}>
+        {isLoading ? "Logging in..." : "Login"}
+      </button>
     </div>
-    <div class="form-message">
-      {message}
-    </div>
+    <div class="form-message">{message}</div>
   </form>
   <div class="form-options">
     <a href="password-reset">Forgot Password?</a>
@@ -86,6 +102,14 @@
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
+  }
+
+  .form-field input[type="password"]:valid {
+    border-color: green;
+  }
+
+  .form-field input[type="password"]:invalid {
+    border-color: red;
   }
 
   .form-field button {
