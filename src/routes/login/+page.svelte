@@ -21,13 +21,14 @@
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    if (isLoggedIn) {
+    if ($isLoggedIn) {
       message = "You are already logged in!";
       return;
     }
     isLoading = true;
     try {
       const token = await loginUser(email, password);
+      console.log(token);
       setAuthToken(token);
       const user = await getUserInfo(token);
       setUserProfile(user);
@@ -57,6 +58,9 @@
         on:input={handlePasswordInput}
         style:borderColor={isPasswordValid ? "green" : "#ccc"}
       />
+      <span class="password-requirements"
+        >Password must be at least 8 characters long.</span
+      >
     </div>
     <div class="form-field">
       <button disabled={isLoading || !isPasswordValid}>
@@ -97,7 +101,7 @@
   .form-field input[type="email"],
   .form-field input[type="password"] {
     display: block;
-    width: 100%;
+    width: 95%;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 3px;
@@ -149,5 +153,10 @@
 
   .form-options a:hover {
     text-decoration: underline;
+  }
+
+  .password-requirements {
+    font-size: 0.8rem;
+    color: #777;
   }
 </style>

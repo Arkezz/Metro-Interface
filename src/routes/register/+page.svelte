@@ -72,7 +72,7 @@
   .form-field input[type="email"],
   .form-field input[type="password"] {
     display: block;
-    width: 100%;
+    width: 95%;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 3px;

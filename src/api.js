@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authToken } from "./store.js";
 
 const API_URL = "http://localhost:5000"; // Replace with your backend URL
 
@@ -16,18 +17,16 @@ export const loginUser = async (email, password) => {
   return response.data.token;
 };
 
-export const requestPasswordReset = async (email) => {
-  const response = await axios.post(`${API_URL}/request-password-reset`, {
-    email,
-  });
-  return response.data.message;
-};
-
-export const resetPassword = async (token, password) => {
-  const response = await axios.post(`${API_URL}/reset-password`, {
-    token,
-    password,
-  });
+export const resetPassword = async (token, password, newPassword) => {
+  const response = await axios.post(
+    `${API_URL}/reset-password`,
+    { password, newPassword },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data.message;
 };
 
