@@ -1,5 +1,6 @@
 <script>
   export let value = "";
+  export let tooltip = true;
   let isPasswordShort = false;
   let requirements = "Password must be at least 8 characters long.";
 
@@ -25,7 +26,9 @@
     on:input={handleInput}
     required
   />
-  <span class="password-requirements">{requirements}</span>
+  {#if tooltip}
+    <span class="password-requirements">{requirements}</span>
+  {/if}
 </div>
 
 <style>
@@ -36,6 +39,12 @@
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
+  }
+
+  .form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
   }
 
   .password-requirements {
