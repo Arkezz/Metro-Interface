@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <div class="wrapper">
   <div class="sidebar">
     <ul>
@@ -9,3 +12,6 @@
     <h1>Welcome, !</h1>
   </div>
 </div>
+
+<style>
+</style>

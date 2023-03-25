@@ -7,8 +7,10 @@
   let email = "";
   let password = "";
   let message = "";
+  let isLoading = false;
 
   const handleLogin = async (event) => {
+    console.log(password, email);
     event.preventDefault();
     if ($isLoggedIn) {
       message = "You are already logged in!";
@@ -39,6 +41,7 @@
       <!-- <button disabled={isLoading || !$PasswordInput.isValid}>
         {isLoading ? "Logging in..." : "Login"}
       </button> -->
+      <button>Login</button>
     </div>
     <div class="form-message">{message}</div>
   </form>

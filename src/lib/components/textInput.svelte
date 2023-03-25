@@ -1,11 +1,16 @@
 <script>
   export let value = "";
   export let lableName = "";
+  export let type = "text";
+
+  function typeAction(node) {
+    node.type = type;
+  }
 </script>
 
 <div class="form-field">
   <label for="email">{lableName}</label>
-  <input type="email" id="email" bind:value required />
+  <input use:typeAction id="email" bind:value required />
 </div>
 
 <style>
@@ -15,7 +20,7 @@
     font-size: 1.2rem;
   }
 
-  .form-field input[type="email"] {
+  .form-field input {
     display: block;
     width: 95%;
     padding: 0.5rem;
