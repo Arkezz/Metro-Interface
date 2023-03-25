@@ -17,8 +17,6 @@
   };
 </script>
 
-//Two forms for taking the old password and the new password
-
 <div class="password-reset-form">
   <h1>Reset Password</h1>
   <form>
@@ -118,14 +116,6 @@
   }
 
   .password-reset-form .form-options a:focus {
-    outline: none;
-  }
-
-  .password-reset-form .form-options a:active {
-    outline: none;
-  }
-
-  .password-reset-form .form-options a:visited {
     outline: none;
   }
 </style>

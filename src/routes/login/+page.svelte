@@ -1,24 +1,11 @@
 <script>
   import { loginUser, getUserInfo } from "../../api.js";
   import { setAuthToken, setUserProfile, isLoggedIn } from "../../store.js";
+  import PasswordInput from "$lib/components/passwordInput.svelte";
 
   let email = "";
   let password = "";
   let message = "";
-  let isLoading = false;
-  let isPasswordShort = false;
-
-  const handlePasswordInput = (event) => {
-    const { value } = event.target;
-    isPasswordShort = value.length >= 8;
-    const borderColor =
-      value.length === 0 ? "#ccc" : isPasswordShort ? "green" : "red";
-    event.target.style.borderColor = borderColor;
-    const passwordRequirements = document.querySelector(
-      ".password-requirements"
-    );
-    passwordRequirements.style.color = borderColor;
-  };
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -49,23 +36,11 @@
       <label for="email">Email:</label>
       <input type="email" id="email" bind:value={email} required />
     </div>
+    <PasswordInput bind:value={password} />
     <div class="form-field">
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        bind:value={password}
-        on:input={handlePasswordInput}
-        required
-      />
-      <span class="password-requirements"
-        >Password must be at least 8 characters long.</span
-      >
-    </div>
-    <div class="form-field">
-      <button disabled={isLoading || !isPasswordShort}>
+      <!-- <button disabled={isLoading || !$PasswordInput.isValid}>
         {isLoading ? "Logging in..." : "Login"}
-      </button>
+      </button> -->
     </div>
     <div class="form-message">{message}</div>
   </form>
@@ -98,18 +73,13 @@
     font-size: 1.2rem;
   }
 
-  .form-field input[type="email"],
-  .form-field input[type="password"] {
+  .form-field input[type="email"] {
     display: block;
     width: 95%;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
-  }
-
-  .form-field input[type="password"]:valid {
-    border-color: green;
   }
 
   .form-field button {
@@ -149,10 +119,5 @@
 
   .form-options a:hover {
     text-decoration: underline;
-  }
-
-  .password-requirements {
-    font-size: 0.8rem;
-    color: #777;
   }
 </style>

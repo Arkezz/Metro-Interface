@@ -1,5 +1,6 @@
 <script>
   import { registerUser } from "../../api.js";
+  import PasswordInput from "$lib/components/passwordInput.svelte";
 
   let email = "";
   let username = "";
@@ -29,10 +30,7 @@
       <label for="email">Email:</label>
       <input type="email" id="email" bind:value={email} />
     </div>
-    <div class="form-field">
-      <label for="password">Password:</label>
-      <input type="password" id="password" bind:value={password} />
-    </div>
+    <PasswordInput bind:value={password} />
     <div class="form-field">
       <button on:click={handleRegister}>Register</button>
     </div>
@@ -68,8 +66,7 @@
   }
 
   .form-field input[type="text"],
-  .form-field input[type="email"],
-  .form-field input[type="password"] {
+  .form-field input[type="email"] {
     display: block;
     width: 95%;
     padding: 0.5rem;
