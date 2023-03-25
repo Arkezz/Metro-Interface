@@ -8,9 +8,8 @@
 
   const handleRegister = async () => {
     try {
-      const token = await registerUser(email, password, username);
-      console.log(email, password, username, token);
-      message = `Registered successfully! Token: ${token}`;
+      await registerUser(email, password, username);
+      message = `Registered successfully!`;
     } catch (error) {
       console.log(error.response.data);
       message =
