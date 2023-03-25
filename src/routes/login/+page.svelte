@@ -6,17 +6,18 @@
   let password = "";
   let message = "";
   let isLoading = false;
-  let isPasswordValid = false;
+  let isPasswordShort = false;
 
   const handlePasswordInput = (event) => {
     const { value } = event.target;
-    if (value.length >= 8) {
-      isPasswordValid = true;
-      event.target.style.borderColor = "green";
-    } else {
-      isPasswordValid = false;
-      event.target.style.borderColor = "#ccc";
-    }
+    isPasswordShort = value.length >= 8;
+    const borderColor =
+      value.length === 0 ? "#ccc" : isPasswordShort ? "green" : "red";
+    event.target.style.borderColor = borderColor;
+    const passwordRequirements = document.querySelector(
+      ".password-requirements"
+    );
+    passwordRequirements.style.color = borderColor;
   };
 
   const handleLogin = async (event) => {
@@ -28,7 +29,6 @@
     isLoading = true;
     try {
       const token = await loginUser(email, password);
-      console.log(token);
       setAuthToken(token);
       const user = await getUserInfo(token);
       setUserProfile(user);
@@ -47,7 +47,7 @@
   <form on:submit={handleLogin}>
     <div class="form-field">
       <label for="email">Email:</label>
-      <input type="email" id="email" bind:value={email} />
+      <input type="email" id="email" bind:value={email} required />
     </div>
     <div class="form-field">
       <label for="password">Password:</label>
@@ -56,14 +56,14 @@
         id="password"
         bind:value={password}
         on:input={handlePasswordInput}
-        style:borderColor={isPasswordValid ? "green" : "#ccc"}
+        required
       />
       <span class="password-requirements"
         >Password must be at least 8 characters long.</span
       >
     </div>
     <div class="form-field">
-      <button disabled={isLoading || !isPasswordValid}>
+      <button disabled={isLoading || !isPasswordShort}>
         {isLoading ? "Logging in..." : "Login"}
       </button>
     </div>
@@ -110,10 +110,6 @@
 
   .form-field input[type="password"]:valid {
     border-color: green;
-  }
-
-  .form-field input[type="password"]:invalid {
-    border-color: red;
   }
 
   .form-field button {
