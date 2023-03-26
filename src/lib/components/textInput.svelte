@@ -1,6 +1,6 @@
 <script>
   export let value = "";
-  export let lableName = "";
+  export let labelName = "";
   export let type = "text";
 
   function typeAction(node) {
@@ -9,8 +9,8 @@
 </script>
 
 <div class="form-field">
-  <label for="email">{lableName}</label>
-  <input use:typeAction id="email" bind:value required />
+  <label for={labelName}>{labelName}</label>
+  <input use:typeAction id={type} bind:value required />
 </div>
 
 <style>
@@ -28,5 +28,11 @@
     border-radius: 3px;
     border: 1px solid #ccc;
     margin-bottom: 1rem;
+  }
+
+  .form-field input:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+    outline: none;
   }
 </style>

@@ -41,6 +41,12 @@
     border: 1px solid #ccc;
   }
 
+  .form-field input[type="password"]:focus {
+    outline: none;
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+  }
+
   .form-field label {
     display: block;
     margin-bottom: 0.5rem;

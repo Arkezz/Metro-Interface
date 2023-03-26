@@ -23,8 +23,8 @@
 <div class="register-form">
   <h1>Registration</h1>
   <form on:submit={handleRegister}>
-    <TextInput bind:value={username} lableName="Username:" />
-    <TextInput type="email" bind:value={email} lableName="Email:" />
+    <TextInput bind:value={username} labelName="Username:" />
+    <TextInput type="email" bind:value={email} labelName="Email:" />
     <PasswordInput bind:value={password} />
     <div class="form-field">
       <button>Register</button>
