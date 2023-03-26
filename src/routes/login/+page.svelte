@@ -38,10 +38,9 @@
     <TextInput type="email" bind:value={email} lableName="Email:" />
     <PasswordInput bind:value={password} />
     <div class="form-field">
-      <!-- <button disabled={isLoading || !$PasswordInput.isValid}>
+      <button disabled={isLoading}>
         {isLoading ? "Logging in..." : "Login"}
-      </button> -->
-      <button>Login</button>
+      </button>
     </div>
     <div class="form-message">{message}</div>
   </form>

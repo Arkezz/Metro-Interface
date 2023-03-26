@@ -1,5 +1,5 @@
 <script>
-  import { isLoggedIn, setAuthToken } from "../store.js";
+  import { isLoggedIn } from "../store.js";
 </script>
 
 <div class="hero">
