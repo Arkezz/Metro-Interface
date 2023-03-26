@@ -3,6 +3,7 @@
   import { setAuthToken, setUserProfile, isLoggedIn } from "../../store.js";
   import PasswordInput from "$lib/components/passwordInput.svelte";
   import TextInput from "$lib/components/textInput.svelte";
+  import Button from "$lib/components/button.svelte";
 
   let email = "";
   let password = "";
@@ -37,11 +38,7 @@
   <form on:submit={handleLogin}>
     <TextInput type="email" bind:value={email} labelName="Email:" />
     <PasswordInput bind:value={password} />
-    <div class="form-field">
-      <button disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
-      </button>
-    </div>
+    <Button text="Login" />
     <div class="form-message">{message}</div>
   </form>
   <div class="form-options">
@@ -61,27 +58,6 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 2rem;
-  }
-
-  .form-field {
-    margin-bottom: 1rem;
-  }
-
-  .form-field button {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
-  .form-field button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 
   .form-message {

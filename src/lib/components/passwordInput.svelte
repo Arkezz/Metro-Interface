@@ -1,7 +1,7 @@
 <script>
   export let value = "";
   export let tooltip = true;
-  let isPasswordShort = false;
+  export let isPasswordShort = false;
   let requirements = "Password must be at least 8 characters long.";
 
   const handleInput = (event) => {

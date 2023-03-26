@@ -1,7 +1,6 @@
 import axios from "axios";
-import { authToken } from "./store.js";
 
-const API_URL = "http://localhost:5000"; // Replace with your backend URL
+const API_URL = "http://localhost:5000";
 
 export const registerUser = async (email, password, username) => {
   const response = await axios.post(`${API_URL}/register`, {

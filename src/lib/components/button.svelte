@@ -2,7 +2,7 @@
   export let text = "";
 </script>
 
-<button disabled>
+<button>
   {text}
 </button>
 
