@@ -1,6 +1,6 @@
 <script>
   import Svg from "$lib/icons/svgIcon.svelte";
-  import { plusIcon } from "$lib/svg.js";
+  import { eyeIcon } from "$lib/svg.js";
   export let value = "";
   export let tooltip = true;
   export let isPasswordShort = false;
@@ -37,7 +37,7 @@
       style="position:absolute; top: 50%; right: 5px; transform: translateY(-50%); border: none; background-color: transparent; cursor: pointer;"
       on:click={() => (show_password = !show_password)}
     >
-      <Svg icon={plusIcon} />
+      <Svg d={eyeIcon} size={24} />
     </button>
   </div>
   {#if tooltip}
