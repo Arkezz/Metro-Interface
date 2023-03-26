@@ -1,8 +1,12 @@
 <script>
+  import Svg from "$lib/icons/svgIcon.svelte";
+  import { plusIcon } from "$lib/svg.js";
   export let value = "";
   export let tooltip = true;
   export let isPasswordShort = false;
   let requirements = "Password must be at least 8 characters long.";
+  let show_password = false;
+  $: type = show_password ? "text" : "password";
 
   const handleInput = (event) => {
     const { value } = event.target;
@@ -19,29 +23,39 @@
 
 <div class="form-field">
   <label for="password">Password:</label>
-  <input
-    type="password"
-    id="password"
-    bind:value
-    on:input={handleInput}
-    required
-  />
+  <div style="position:relative;">
+    <input
+      {type}
+      id="password"
+      {value}
+      on:input={handleInput}
+      required
+      style="padding-right: 30px;"
+    />
+    <button
+      type="button"
+      style="position:absolute; top: 50%; right: 5px; transform: translateY(-50%); border: none; background-color: transparent; cursor: pointer;"
+      on:click={() => (show_password = !show_password)}
+    >
+      <Svg icon={plusIcon} />
+    </button>
+  </div>
   {#if tooltip}
     <span class="password-requirements">{requirements}</span>
   {/if}
 </div>
 
 <style>
-  .form-field input[type="password"] {
+  .form-field input {
     display: block;
-    width: 95%;
+    width: 90%;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
   }
 
-  .form-field input[type="password"]:focus {
+  .form-field input:focus {
     outline: none;
     border-color: blue;
     box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);

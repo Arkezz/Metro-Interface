@@ -1,5 +1,5 @@
 <script>
-  import { loginUser, getUserInfo } from "../../api.js";
+  import { loginUser, getUserInfo } from "../../lib/api.js";
   import { setAuthToken, setUserProfile, isLoggedIn } from "../../store.js";
   import PasswordInput from "$lib/components/passwordInput.svelte";
   import TextInput from "$lib/components/textInput.svelte";

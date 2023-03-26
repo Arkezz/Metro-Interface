@@ -1,5 +1,5 @@
 <script>
-  import { registerUser } from "../../api.js";
+  import { registerUser } from "../../lib/api.js";
   import PasswordInput from "$lib/components/passwordInput.svelte";
   import TextInput from "$lib/components/textInput.svelte";
   import Button from "$lib/components/button.svelte";
