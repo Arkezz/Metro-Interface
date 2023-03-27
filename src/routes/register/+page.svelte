@@ -11,7 +11,6 @@
 
   const handleRegister = async () => {
     try {
-      console.log(email, password, username);
       await registerUser(email, password, username);
       message = `Registered successfully!`;
     } catch (error) {

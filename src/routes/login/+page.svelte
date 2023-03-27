@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { loginUser, getUserInfo } from "../../lib/api.js";
   import { setAuthToken, setUserProfile, isLoggedIn } from "../../store.js";
   import PasswordInput from "$lib/components/passwordInput.svelte";
@@ -9,6 +10,29 @@
   let password = "";
   let message = "";
   let isLoading = false;
+  let rememberMe = false;
+
+  onMount(() => {
+    const authToken = getCookie("authToken");
+    if (authToken) {
+      setAuthToken(authToken);
+      getUserInfo(authToken).then((user) => {
+        setUserProfile(user);
+        $isLoggedIn = true;
+      });
+    }
+  });
+
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName === name) {
+        return cookieValue;
+      }
+    }
+    return null;
+  }
 
   const handleLogin = async (event) => {
     console.log(password, email);
@@ -23,6 +47,11 @@
       setAuthToken(token);
       const user = await getUserInfo(token);
       setUserProfile(user);
+      if (rememberMe) {
+        document.cookie = `authToken=${token}; expires=${new Date(
+          Date.now() + 604800000
+        )}`;
+      }
       message = `Logged in successfully! Welcome ${user.username}`;
     } catch (error) {
       message =
@@ -38,6 +67,10 @@
   <form on:submit={handleLogin}>
     <TextInput type="email" bind:value={email} labelName="Email:" />
     <PasswordInput bind:value={password} />
+    <div class="form-group">
+      <label for="remember-me" class="form-label">Remember me:</label>
+      <input type="checkbox" id="remember-me" bind:checked={rememberMe} />
+    </div>
     <Button text="Login" />
     <div class="form-message">{message}</div>
   </form>

@@ -38,24 +38,38 @@ export const getUserInfo = async (token) => {
   return response.data;
 };
 
-export const viewRefundRequests = async () => {
-  const response = await axios.get(`${API_URL}/view-refund-requests`);
-  return response.data.refundRequests;
+export const getRefundRequests = async (token) => {
+  const response = await axios.get(`${API_URL}/refund-requests`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 };
 
-export const uploadRefundRequest = async (ticketId, reason) => {
-  const response = await axios.post(`${API_URL}/upload-refund-request`, {
-    ticketId,
-    reason,
-  });
-  return response.data.message;
+export const submitRefundRequest = async (token, ticket_id, reason) => {
+  const response = await axios.post(
+    `${API_URL}/refund-requests`,
+    { ticket_id, reason },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
 };
-
-export const approveRefundRequest = async (refundId) => {
-  const response = await axios.post(`${API_URL}/approve-refund-request`, {
-    refundId,
-  });
-  return response.data.message;
+export const approveRefundRequest = async (token, id, approved) => {
+  const response = await axios.put(
+    `${API_URL}/refund-requests/${id}`,
+    { approved },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
 };
 
 export const purchaseTicket = async (token, routeId, ticketType, amount) => {
