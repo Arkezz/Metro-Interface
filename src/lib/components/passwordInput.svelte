@@ -24,9 +24,9 @@
   <label for="password">Password:</label>
   <div style="position:relative;">
     <input
-      {type}
+      type="password"
       id="password"
-      {value}
+      bind:value
       on:input={handleInput}
       required
       style="padding-right: 30px;"
