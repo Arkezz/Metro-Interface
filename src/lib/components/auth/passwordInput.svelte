@@ -6,10 +6,6 @@
   export let isPasswordShort = false;
   let show_password = false;
 
-  const handleKeypress = ({ charCode }) => {
-    if (charCode === 13) dispatch("submit");
-  };
-
   const handleInput = (event) => {
     const { value } = event.target;
     isPasswordShort = value.length >= 8;
@@ -27,7 +23,6 @@
       {...{ type }}
       id="password"
       bind:value
-      on:keypress={handleKeypress}
       on:input={handleInput}
       required
     />
