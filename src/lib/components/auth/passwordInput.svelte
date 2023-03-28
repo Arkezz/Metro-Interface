@@ -6,6 +6,10 @@
   export let isPasswordShort = false;
   let show_password = false;
 
+  const handleKeypress = ({ charCode }) => {
+    if (charCode === 13) dispatch("submit");
+  };
+
   const handleInput = (event) => {
     const { value } = event.target;
     isPasswordShort = value.length >= 8;
@@ -18,24 +22,24 @@
   };
 
   $: type = show_password ? "text" : "password";
+
+  function typeAction(node) {
+    node.type = type;
+  }
 </script>
 
 <div class="form-field">
   <label for="password">Password:</label>
   <div style="position:relative;">
     <input
-      type="password"
+      {...{ type }}
       id="password"
       bind:value
+      on:keypress={handleKeypress}
       on:input={handleInput}
       required
-      style="padding-right: 30px;"
     />
-    <button
-      type="button"
-      style="position:absolute; top: 50%; right: 5px; transform: translateY(-50%); border: none; background-color: transparent; cursor: pointer;"
-      on:click={() => (show_password = !show_password)}
-    >
+    <button type="button" on:click={() => (show_password = !show_password)}>
       <Svg d={show_password ? eyeOffIcon : eyeIcon} size="24" />
     </button>
   </div>
@@ -58,6 +62,7 @@
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
+    padding-right: 30px;
   }
 
   .form-field input:focus {
@@ -70,5 +75,15 @@
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+  }
+
+  .form-field button {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 </style>

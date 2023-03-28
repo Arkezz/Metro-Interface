@@ -5,7 +5,7 @@
   import { TextInput, PasswordInput, Button } from "$components";
 
   let email = "";
-  let password = "";
+  let password;
   let message = "";
   let isLoading = false;
   let rememberMe = false;

@@ -15,12 +15,7 @@
   }
 
   onMount(async () => {
-    //If the user is not logged in, redirect to the login page
-    if (!$authToken) {
-      window.location.href = "/login";
-    } else {
-      await loadStations();
-    }
+    await loadStations();
   });
 
   async function addStation(event) {
