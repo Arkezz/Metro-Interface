@@ -187,23 +187,15 @@ export const createStation = async (name, line_id) => {
     name,
     line_id,
   });
-  return response.data.message;
+  return response.data;
 };
 
-export const updateStation = async (token, stationId, name, location) => {
-  const response = await axios.put(
-    `${API_URL}/update-station/${stationId}`,
-    {
-      name,
-      location,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data.message;
+export const updateStation = async (stationId, name, line_id) => {
+  const response = await axios.put(`${API_URL}/update-station/${stationId}`, {
+    name,
+    line_id,
+  });
+  return response.data;
 };
 
 export const deleteStation = async (stationId) => {

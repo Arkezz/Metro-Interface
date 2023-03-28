@@ -1,5 +1,5 @@
 <script>
-  import { isLoggedIn } from "../store.js";
+  import { isLoggedIn } from "$lib/store.js";
 </script>
 
 <div class="hero">
