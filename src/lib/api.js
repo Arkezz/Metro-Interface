@@ -182,23 +182,47 @@ export const viewAllStations = async () => {
   return response.data;
 };
 
-export const createStation = async (name, line_id) => {
-  const response = await axios.post(`${API_URL}/create-station`, {
-    name,
-    line_id,
-  });
+export const createStation = async (token, name, line_id) => {
+  console.log(token, name, line_id);
+  const response = await axios.post(
+    `${API_URL}/create-station`,
+    {
+      name,
+      line_id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data;
 };
 
-export const updateStation = async (stationId, name, line_id) => {
-  const response = await axios.put(`${API_URL}/update-station/${stationId}`, {
-    name,
-    line_id,
-  });
+export const updateStation = async (token, stationId, name, line_id) => {
+  const response = await axios.put(
+    `${API_URL}/update-station/${stationId}`,
+    {
+      name,
+      line_id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data;
 };
 
-export const deleteStation = async (stationId) => {
-  const response = await axios.delete(`${API_URL}/delete-station/${stationId}`);
+export const deleteStation = async (token, stationId) => {
+  const response = await axios.delete(
+    `${API_URL}/delete-station/${stationId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data.message;
 };

@@ -1,6 +1,6 @@
 <script>
-  import PlanRoute from "$components";
-  import StationSearch from "$components";
+  import PlanRoute from "$lib/components/home/PlanRoute.svelte";
+  import StationSearch from "$lib/components/home/stationSearch.svelte";
 </script>
 
 <main class="container">

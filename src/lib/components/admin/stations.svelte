@@ -15,7 +15,12 @@
   }
 
   onMount(async () => {
-    await loadStations();
+    //If the user is not logged in, redirect to the login page
+    if (!$authToken) {
+      window.location.href = "/login";
+    } else {
+      await loadStations();
+    }
   });
 
   async function addStation(event) {
@@ -23,7 +28,7 @@
     const data = new FormData(event.target);
     const name = data.get("name");
     const line_id = data.get("line");
-    const result = await createStation(name, line_id);
+    const result = await createStation($authToken, name, line_id);
     stations = [...stations, result];
     event.target.reset();
   }
@@ -34,7 +39,7 @@
     const id = data.get("id");
     const name = data.get("name");
     const line_id = data.get("line");
-    const result = await updateStation(id, name, line_id);
+    const result = await updateStation($authToken, id, name, line_id);
     stations = stations.map((station) => {
       if (station.station_id === result.station_id) {
         return result;
@@ -44,7 +49,7 @@
   }
 
   async function deleteSelectedStation(id) {
-    await deleteStation(id);
+    await deleteStation($authToken, id);
     stations = stations.filter((station) => station.station_id !== id);
   }
 </script>

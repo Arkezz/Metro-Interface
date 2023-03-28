@@ -1,5 +1,5 @@
 <script>
-  import { userProfile } from "../../store.js";
+  import { userProfile } from "$lib/store.js";
 </script>
 
 <div>
