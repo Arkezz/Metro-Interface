@@ -15,17 +15,9 @@
     isPasswordShort = value.length >= 8;
     event.target.style.borderColor =
       value.length === 0 ? "#ccc" : isPasswordShort ? "green" : "red";
-    const passwordRequirements = document.querySelector(
-      ".password-requirements"
-    );
-    passwordRequirements.style.color = event.target.style.borderColor;
   };
 
   $: type = show_password ? "text" : "password";
-
-  function typeAction(node) {
-    node.type = type;
-  }
 </script>
 
 <div class="form-field">
@@ -48,8 +40,9 @@
       class="password-requirements"
       style="color: {isPasswordShort
         ? 'green'
-        : '#ccc'}; font-size: 0.8rem; margin-top: 0.5rem;"
-      >Password must be at least 8 characters long.</span
+        : value.length === 0
+        ? '#ccc'
+        : 'red'}; ">Password must be at least 8 characters long.</span
     >
   {/if}
 </div>
@@ -85,5 +78,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  .password-requirements {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
   }
 </style>
