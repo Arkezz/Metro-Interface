@@ -1,6 +1,6 @@
 <script>
   import { resetPassword } from "$lib/api.js";
-  import { authToken } from "../../store.js";
+  import { authToken } from "$lib/store.js";
 
   let oldPassword = "";
   let newPassword = "";

@@ -1,8 +1,6 @@
 <script>
-  import { registerUser } from "../../lib/api.js";
-  import PasswordInput from "$lib/components/passwordInput.svelte";
-  import TextInput from "$lib/components/textInput.svelte";
-  import Button from "$lib/components/button.svelte";
+  import { registerUser } from "$lib/api.js";
+  import { TextInput, PasswordInput, Button } from "$lib/components";
 
   let email = "";
   let username = "";
