@@ -179,22 +179,14 @@ export const approveSeniorRequest = async (token, requestId) => {
 
 export const viewAllStations = async () => {
   const response = await axios.get(`${API_URL}/view-all-stations`);
-  return response.data.stations;
+  return response.data;
 };
 
-export const createStation = async (token, name, location) => {
-  const response = await axios.post(
-    `${API_URL}/create-station`,
-    {
-      name,
-      location,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const createStation = async (name, line_id) => {
+  const response = await axios.post(`${API_URL}/create-station`, {
+    name,
+    line_id,
+  });
   return response.data.message;
 };
 
@@ -214,14 +206,7 @@ export const updateStation = async (token, stationId, name, location) => {
   return response.data.message;
 };
 
-export const deleteStation = async (token, stationId) => {
-  const response = await axios.delete(
-    `${API_URL}/delete-station/${stationId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const deleteStation = async (stationId) => {
+  const response = await axios.delete(`${API_URL}/delete-station/${stationId}`);
   return response.data.message;
 };

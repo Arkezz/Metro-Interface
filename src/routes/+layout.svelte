@@ -24,10 +24,6 @@
   <slot />
 </main>
 
-<div class="footer">
-  <p>Footer</p>
-</div>
-
 <style>
   @import url("https://fonts.cdnfonts.com/css/josefin-sans");
 
