@@ -1,6 +1,6 @@
 <script>
   import { registerUser } from "$lib/api.js";
-  import { TextInput, PasswordInput, Button } from "$lib/components";
+  import { TextInput, PasswordInput, Button } from "$components";
 
   let email = "";
   let username = "";

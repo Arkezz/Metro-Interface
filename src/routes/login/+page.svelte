@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { loginUser, getUserInfo } from "$lib/api.js";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
-  import { TextInput, PasswordInput, Button } from "$lib/components";
+  import { TextInput, PasswordInput, Button } from "$components";
 
   let email = "";
   let password = "";
