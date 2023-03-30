@@ -2,6 +2,7 @@
   import Svg from "$lib/icons/svgIcon.svelte";
   import { eyeIcon, eyeOffIcon } from "$lib/svg.js";
   export let value = "";
+  export let name = "";
   export let tooltip = true;
   export let isPasswordShort = false;
   let show_password = false;
@@ -22,6 +23,7 @@
     <input
       {...{ type }}
       id="password"
+      {name}
       bind:value
       on:input={handleInput}
       required

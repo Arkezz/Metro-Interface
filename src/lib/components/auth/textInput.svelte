@@ -2,6 +2,7 @@
   export let value = "";
   export let labelName = "";
   export let type = "text";
+  export let name = "";
 
   function typeAction(node) {
     node.type = type;
@@ -10,7 +11,7 @@
 
 <div class="form-field">
   <label for={labelName}>{labelName}</label>
-  <input use:typeAction id={type} bind:value required />
+  <input use:typeAction {name} id={type} bind:value required />
 </div>
 
 <style>
