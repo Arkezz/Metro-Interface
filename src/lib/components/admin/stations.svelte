@@ -1,47 +1,9 @@
 <script>
-  import { onMount } from "svelte";
+  import { enhance } from "$app/forms";
   import { authToken } from "$lib/store.js";
-  import {
-    createStation,
-    deleteStation,
-    updateStation,
-    viewAllStations,
-  } from "$lib/api.js";
+  import { deleteStation } from "$lib/api.js";
 
-  let stations = [];
-
-  async function loadStations() {
-    stations = await viewAllStations();
-  }
-
-  onMount(async () => {
-    await loadStations();
-  });
-
-  async function addStation(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const name = data.get("name");
-    const line_id = data.get("line");
-    const result = await createStation($authToken, name, line_id);
-    stations = [...stations, result];
-    event.target.reset();
-  }
-
-  async function updateSelectedStation(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const id = data.get("id");
-    const name = data.get("name");
-    const line_id = data.get("line");
-    const result = await updateStation($authToken, id, name, line_id);
-    stations = stations.map((station) => {
-      if (station.station_id === result.station_id) {
-        return result;
-      }
-      return station;
-    });
-  }
+  export let stations = [];
 
   async function deleteSelectedStation(id) {
     await deleteStation($authToken, id);
@@ -51,7 +13,7 @@
 
 <h1>Admin Page</h1>
 <h2>Stations</h2>
-<form on:submit|preventDefault={addStation}>
+<form method="POST" action="/admin?/create">
   <label>
     Name:
     <input type="text" name="name" required />
@@ -59,7 +21,7 @@
   <br />
   <label>
     Line:
-    <input type="text" name="line" required />
+    <input type="text" name="line_id" required />
   </label>
   <br />
   <button type="submit">Add Station</button>
@@ -80,7 +42,7 @@
         <td>{station.name}</td>
         <td>{station.line_id}</td>
         <td>
-          <form on:submit|preventDefault={updateSelectedStation}>
+          <form method="POST" action="/admin?/update">
             <input type="hidden" name="id" value={station.station_id} />
             <label>
               Name:
@@ -89,7 +51,12 @@
             <br />
             <label>
               Line:
-              <input type="text" name="line" value={station.line_id} required />
+              <input
+                type="text"
+                name="line_id"
+                value={station.line_id}
+                required
+              />
             </label>
             <br />
             <button type="submit">Update</button>

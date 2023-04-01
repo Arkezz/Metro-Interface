@@ -183,7 +183,6 @@ export const viewAllStations = async () => {
 };
 
 export const createStation = async (token, name, line_id) => {
-  console.log(token, name, line_id);
   const response = await axios.post(
     `${API_URL}/create-station`,
     {
