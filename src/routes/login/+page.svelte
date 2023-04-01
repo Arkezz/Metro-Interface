@@ -1,6 +1,6 @@
 <script>
+  import { enhance } from "$app/forms";
   import { onMount } from "svelte";
-  import { loginUser, getUserInfo } from "$lib/api.js";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
   import { TextInput, PasswordInput, Button } from "$components";
 
@@ -32,7 +32,7 @@
     return null;
   }
 
-  const handleLogin = async (event) => {
+  const handleLogin2 = async (event) => {
     console.log(password, email);
     event.preventDefault();
     if ($isLoggedIn) {
@@ -58,13 +58,37 @@
       isLoading = false;
     }
   };
+
+  const handleLogin = ({ form, data, action, cancel }) => {
+    if ($isLoggedIn) {
+      message = "You are already logged in!";
+      cancel();
+    }
+
+    return async ({ result, update }) => {
+      if (result.type === "success") {
+        const { token, user, toast } = result.data;
+        message = toast;
+        setAuthToken(token);
+        setUserProfile(user);
+        $isLoggedIn = true;
+      } else {
+        update();
+      }
+    };
+  };
 </script>
 
 <div class="login-form">
   <h1>Login</h1>
-  <form on:submit={handleLogin}>
-    <TextInput type="email" bind:value={email} labelName="Email:" />
-    <PasswordInput bind:value={password} />
+  <form method="POST" use:enhance={handleLogin}>
+    <TextInput
+      type="email"
+      name="email"
+      bind:value={email}
+      labelName="Email:"
+    />
+    <PasswordInput name="password" bind:value={password} />
     <div class="form-group">
       <label for="remember-me" class="form-label">Remember me:</label>
       <input type="checkbox" id="remember-me" bind:checked={rememberMe} />

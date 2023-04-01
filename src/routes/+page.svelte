@@ -1,6 +1,9 @@
 <script>
   import PlanRoute from "$lib/components/home/PlanRoute.svelte";
   import StationSearch from "$lib/components/home/stationSearch.svelte";
+
+  export let data;
+  $: ({ stations } = data);
 </script>
 
 <main class="container">
@@ -41,7 +44,7 @@
       </div>
     </div>
   </section>
-  <StationSearch />
+  <StationSearch {stations} />
   <PlanRoute />
 </main>
 

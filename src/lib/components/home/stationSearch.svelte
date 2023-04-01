@@ -1,4 +1,7 @@
 <script>
+  export let stations = [];
+
+  //Implement auto complete functionality:
 </script>
 
 <section class="stations">
