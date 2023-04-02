@@ -9,6 +9,10 @@ export const actions = {
     const { email, password } = data;
     try {
       const token = await loginUser(email, password);
+      cookies.set("session", token, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+      });
       const user = await getUserInfo(token);
 
       if (!user) {

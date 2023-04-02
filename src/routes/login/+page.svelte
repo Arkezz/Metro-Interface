@@ -71,8 +71,7 @@
         const { token, user, toast } = result.data;
         message = toast;
         setAuthToken(token);
-        const userProfile = writable({ username: "Guest" });
-        $: userProfile.set(user);
+        setUserProfile(user);
         $isLoggedIn = true;
       } else {
         update();

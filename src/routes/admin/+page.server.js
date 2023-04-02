@@ -11,7 +11,7 @@ export const actions = {
   create: async ({ request, cookies }) => {
     const data = Object.fromEntries(await request.formData());
     const { name, line_id } = data;
-    const token = cookies.get("authToken");
+    const token = cookies.get("session");
 
     try {
       const result = await createStation(token, name, line_id);
