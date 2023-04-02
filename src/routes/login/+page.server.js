@@ -1,4 +1,7 @@
 import { loginUser, getUserInfo } from "$lib/api.js";
+import { fail } from "@sveltejs/kit";
+
+export const load = () => {};
 
 export const actions = {
   default: async ({ request, cookies }) => {

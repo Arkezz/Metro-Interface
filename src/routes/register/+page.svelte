@@ -1,5 +1,5 @@
 <script>
-  import { registerUser } from "$lib/api.js";
+  import { enhance } from "$app/forms";
   import { TextInput, PasswordInput, Button } from "$components";
 
   let email = "";
@@ -7,24 +7,29 @@
   let password = "";
   let message = "";
 
-  const handleRegister = async () => {
-    try {
-      await registerUser(email, password, username);
-      message = `Registered successfully!`;
-    } catch (error) {
-      console.log(error.response.data);
-      message =
-        error.response?.data || "Something went wrong. Please try again later.";
-    }
+  const handleRegister = ({ form, action, data, cancel }) => {
+    return async ({ result, update }) => {
+      if (result.type === "success") {
+        const { toast } = result.data;
+        message = toast;
+      } else {
+        update();
+      }
+    };
   };
 </script>
 
 <div class="register-form">
   <h1>Registration</h1>
-  <form on:submit={handleRegister}>
-    <TextInput bind:value={username} labelName="Username:" />
-    <TextInput type="email" bind:value={email} labelName="Email:" />
-    <PasswordInput bind:value={password} />
+  <form method="POST" use:enhance={handleRegister}>
+    <TextInput name="username" bind:value={username} labelName="Username:" />
+    <TextInput
+      type="email"
+      name="email"
+      bind:value={email}
+      labelName="Email:"
+    />
+    <PasswordInput name="password" bind:value={password} />
     <Button text="Register" />
     <div class="form-message">
       <p>{message}</p>

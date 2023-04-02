@@ -1,6 +1,7 @@
 <script>
   import { enhance } from "$app/forms";
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
+  import { writable } from "svelte/store";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
   import { TextInput, PasswordInput, Button } from "$components";
 
@@ -70,7 +71,8 @@
         const { token, user, toast } = result.data;
         message = toast;
         setAuthToken(token);
-        setUserProfile(user);
+        const userProfile = writable({ username: "Guest" });
+        $: userProfile.set(user);
         $isLoggedIn = true;
       } else {
         update();

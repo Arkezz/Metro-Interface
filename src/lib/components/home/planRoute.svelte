@@ -1,4 +1,5 @@
 <script>
+  export let routes = [];
 </script>
 
 <section class="routes">
