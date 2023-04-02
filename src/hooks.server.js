@@ -1,21 +1,27 @@
-// import { redirect } from "@sveltejs/kit";
-// const something = true;
-// // hooks.server.js
-// export const handle = async ({ event, resolve }) => {
-//   const requestedPath = event.url.pathname;
-//   const cookies = event.cookies;
+import { sequence } from "@sveltejs/kit/hooks";
+const something = true;
+// hooks.server.js
+const temp = async ({ event, resolve }) => {
+  const route = event.url;
 
-//   // Auth check
-//   //const isTokenValid = validateTokenFunction(cookies);
+  let start = performance.now();
+  const response = await resolve(event);
+  let end = performance.now();
+  let time = end - start;
 
-//   // Restrict all routes under /admin
-//   if (requestedPath.includes("/admin")) {
-//     if (something) {
-//       throw redirect(303, "/");
-//     }
-//   }
+  if (time > 2000)
+    console.log(`Time taken to load ${route} is ${time.toFixed(2)} ms`);
 
-//   const response = await resolve(event);
+  return response;
+};
 
-//   return response;
-// };
+const auth = async ({ event, resolve }) => {
+  const session = event.cookies.get("authToken");
+  //const user = await
+
+  event.locals.user = user;
+};
+
+const handleError = async ({ error, event }) => {};
+
+//export const handle = sequence(temp, handleError);
