@@ -63,7 +63,7 @@
   input[type="text"] {
     padding: 15px 20px;
     border-radius: 50px;
-    border: none;
+    border: 1px solid #ccc;
     font-size: 1.2rem;
     width: 70%;
     margin-right: 10px;
@@ -102,7 +102,7 @@
     padding: 20px;
     border-radius: 10px;
     opacity: 1;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
   .station-card.hide {
     opacity: 0;

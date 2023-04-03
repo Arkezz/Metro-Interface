@@ -3,6 +3,10 @@ import { fail } from "@sveltejs/kit";
 
 export const load = () => {};
 
+async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const actions = {
   default: async ({ request, cookies }) => {
     const data = Object.fromEntries(await request.formData());
@@ -18,6 +22,8 @@ export const actions = {
       if (!user) {
       }
 
+      await sleep(2000);
+
       const message = `Logged in successfully! Welcome ${user.username}`;
       return {
         token: token,
@@ -25,7 +31,7 @@ export const actions = {
         toast: message,
       };
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   },
 };

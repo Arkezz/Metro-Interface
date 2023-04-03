@@ -27,6 +27,15 @@
 <style>
   @import url("https://fonts.cdnfonts.com/css/josefin-sans");
 
+  :root {
+    --primary-color: #ff5722;
+    --secondary-color: #00bcd4;
+    --tertiary-color: #ffc107;
+    accent-color: #3f51b5;
+    --text-color: #212121;
+    --link-color: #1976d2;
+  }
+
   * {
     margin: 0;
     padding: 0;

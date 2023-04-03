@@ -16,7 +16,7 @@ const temp = async ({ event, resolve }) => {
 };
 
 const auth = async ({ event, resolve }) => {
-  const session = event.cookies.get("authToken");
+  const session = event.cookies.get("session");
   //const user = await
 
   event.locals.user = user;

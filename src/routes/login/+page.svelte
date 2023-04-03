@@ -1,7 +1,6 @@
 <script>
   import { enhance } from "$app/forms";
   import { onMount, setContext } from "svelte";
-  import { writable } from "svelte/store";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
   import { TextInput, PasswordInput, Button } from "$components";
 
@@ -33,40 +32,16 @@
     return null;
   }
 
-  const handleLogin2 = async (event) => {
-    console.log(password, email);
-    event.preventDefault();
-    if ($isLoggedIn) {
-      message = "You are already logged in!";
-      return;
-    }
-    isLoading = true;
-    try {
-      const token = await loginUser(email, password);
-      setAuthToken(token);
-      const user = await getUserInfo(token);
-      setUserProfile(user);
-      if (rememberMe) {
-        document.cookie = `authToken=${token}; expires=${new Date(
-          Date.now() + 604800000
-        )}`;
-      }
-      message = `Logged in successfully! Welcome ${user.username}`;
-    } catch (error) {
-      message =
-        error.response?.data || "Something went wrong. Please try again later.";
-    } finally {
-      isLoading = false;
-    }
-  };
-
   const handleLogin = ({ form, data, action, cancel }) => {
     if ($isLoggedIn) {
       message = "You are already logged in!";
       cancel();
     }
 
+    isLoading = true;
+
     return async ({ result, update }) => {
+      isLoading = false;
       if (result.type === "success") {
         const { token, user, toast } = result.data;
         message = toast;
@@ -74,7 +49,7 @@
         setUserProfile(user);
         $isLoggedIn = true;
       } else {
-        update();
+        await update();
       }
     };
   };
@@ -94,7 +69,7 @@
       <label for="remember-me" class="form-label">Remember me:</label>
       <input type="checkbox" id="remember-me" bind:checked={rememberMe} />
     </div>
-    <Button text="Login" />
+    <Button {isLoading} text="Login" />
     <div class="form-message">{message}</div>
   </form>
   <div class="form-options">
