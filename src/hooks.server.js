@@ -1,5 +1,4 @@
 import { sequence } from "@sveltejs/kit/hooks";
-const something = true;
 // hooks.server.js
 const temp = async ({ event, resolve }) => {
   const route = event.url;
@@ -15,13 +14,18 @@ const temp = async ({ event, resolve }) => {
   return response;
 };
 
-const auth = async ({ event, resolve }) => {
+const handleSession = async ({ event, resolve }) => {
   const session = event.cookies.get("session");
-  //const user = await
 
-  event.locals.user = user;
+  if (session) {
+    event.locals.session = session;
+  }
+
+  return resolve(event);
 };
 
-const handleError = async ({ error, event }) => {};
+const handleError = async (options) => {
+  console.log(options);
+};
 
-//export const handle = sequence(temp, handleError);
+export const handle = sequence(temp, handleSession);

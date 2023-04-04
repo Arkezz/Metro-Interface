@@ -1,6 +1,6 @@
 <script>
   import { enhance } from "$app/forms";
-  import { onMount, setContext } from "svelte";
+  import { onMount } from "svelte";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
   import { TextInput, PasswordInput, Button } from "$components";
 
@@ -9,28 +9,8 @@
   let message = "";
   let isLoading = false;
   let rememberMe = false;
-
-  onMount(() => {
-    const authToken = getCookie("authToken");
-    if (authToken) {
-      setAuthToken(authToken);
-      getUserInfo(authToken).then((user) => {
-        setUserProfile(user);
-        $isLoggedIn = true;
-      });
-    }
-  });
-
-  function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (const cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.split("=");
-      if (cookieName === name) {
-        return cookieValue;
-      }
-    }
-    return null;
-  }
+  export let data;
+  let { session } = data;
 
   const handleLogin = ({ form, data, action, cancel }) => {
     if ($isLoggedIn) {
@@ -43,9 +23,9 @@
     return async ({ result, update }) => {
       isLoading = false;
       if (result.type === "success") {
-        const { token, user, toast } = result.data;
+        const { user, toast } = result.data;
         message = toast;
-        setAuthToken(token);
+        setAuthToken(session);
         setUserProfile(user);
         $isLoggedIn = true;
       } else {

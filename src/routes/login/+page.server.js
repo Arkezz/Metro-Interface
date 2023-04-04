@@ -1,7 +1,11 @@
 import { loginUser, getUserInfo } from "$lib/api.js";
 import { fail } from "@sveltejs/kit";
 
-export const load = () => {};
+export const load = ({ locals }) => {
+  return {
+    session: locals.session,
+  };
+};
 
 async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -16,13 +20,13 @@ export const actions = {
       cookies.set("session", token, {
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
       });
       const user = await getUserInfo(token);
 
-      if (!user) {
-      }
-
-      await sleep(2000);
+      await sleep(1200);
 
       const message = `Logged in successfully! Welcome ${user.username}`;
       return {
