@@ -2,10 +2,13 @@
   export let stations = [];
   $: searchTerm = "";
 
-  $: filteredStations = stations.map((station) => ({
-    ...station,
-    hide: !station.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  }));
+  $: filteredStations = stations
+    .map((station, index) => ({
+      ...station,
+      hide: !station.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      order: index + 1,
+    }))
+    .sort((a, b) => a.order - b.order);
 </script>
 
 <section class="stations">
@@ -15,10 +18,10 @@
     <input type="text" placeholder="Search stations" bind:value={searchTerm} />
     <button class="btn btn-secondary">Search</button>
   </div>
-  {#if filteredStations.length > 0}
+  {#if filteredStations.filter((station) => !station.hide).length > 0}
     <div class="station-grid">
-      {#each filteredStations as station}
-        <div class="station-card {station.hide ? 'hide' : ''}">
+      {#each filteredStations.filter((station) => !station.hide) as station}
+        <div class="station-card" style="order: {station.order}">
           <h3>{station.name}</h3>
           <p class="line">Lines: {station.line_id}</p>
           <ul class="amenities">
@@ -91,21 +94,20 @@
   }
 
   .station-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .station-card {
+    width: calc(28% - 10px);
+    margin-bottom: 10px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 10px;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  }
-  .station-card.hide {
-    opacity: 0;
   }
 
   .station-card:hover {
@@ -151,8 +153,8 @@
   }
 
   @media only screen and (max-width: 768px) {
-    .station-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .station-card {
+      width: calc(50% - 20px);
     }
   }
 </style>
