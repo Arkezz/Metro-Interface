@@ -1,19 +1,11 @@
 <script>
   import { enhance } from "$app/forms";
-  import { authToken } from "$lib/store.js";
-  import { deleteStation } from "$lib/api.js";
-
   export let stations = [];
-
-  async function deleteSelectedStation(id) {
-    await deleteStation($authToken, id);
-    stations = stations.filter((station) => station.station_id !== id);
-  }
 </script>
 
 <h1>Admin Page</h1>
 <h2>Stations</h2>
-<form method="POST" action="/admin?/create">
+<form method="POST" action="/admin?/create" use:enhance>
   <label>
     Name:
     <input type="text" name="name" required />
@@ -42,7 +34,7 @@
         <td>{station.name}</td>
         <td>{station.line_id}</td>
         <td>
-          <form method="POST" action="/admin?/update">
+          <form method="POST" action="/admin?/update" use:enhance>
             <input type="hidden" name="id" value={station.station_id} />
             <label>
               Name:
@@ -61,9 +53,10 @@
             <br />
             <button type="submit">Update</button>
           </form>
-          <button on:click={() => deleteSelectedStation(station.station_id)}
-            >Delete</button
-          >
+          <form method="POST" action="/admin?/delete" use:enhance>
+            <input type="hidden" name="id" value={station.station_id} />
+            <button type="submit">Delete</button>
+          </form>
         </td>
       </tr>
     {/each}

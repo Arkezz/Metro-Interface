@@ -4,14 +4,14 @@
   export let value = "";
   export let name = "";
   export let tooltip = true;
-  export let isPasswordShort = false;
+  export let isPasswordValid = false;
   let show_password = false;
 
   const handleInput = (event) => {
     const { value } = event.target;
-    isPasswordShort = value.length >= 8;
+    isPasswordValid = value.length >= 8;
     event.target.style.borderColor =
-      value.length === 0 ? "#ccc" : isPasswordShort ? "green" : "red";
+      value.length === 0 ? "#ccc" : isPasswordValid ? "green" : "red";
   };
 
   $: type = show_password ? "text" : "password";
@@ -35,7 +35,7 @@
   {#if tooltip}
     <span
       class="password-requirements"
-      style="color: {isPasswordShort
+      style="color: {isPasswordValid
         ? 'green'
         : value.length === 0
         ? '#ccc'

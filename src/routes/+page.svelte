@@ -4,7 +4,7 @@
   import Tickets from "$lib/components/home/tickets.svelte";
 
   export let data;
-  $: ({ stations } = data);
+  $: ({ stations, routes } = data);
 </script>
 
 <main class="container">
@@ -19,7 +19,7 @@
 
   <Tickets />
   <StationSearch {stations} />
-  <PlanRoute />
+  <PlanRoute {routes} />
 </main>
 
 <style>

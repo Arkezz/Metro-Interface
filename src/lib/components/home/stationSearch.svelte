@@ -2,10 +2,11 @@
   export let stations = [];
   $: searchTerm = "";
 
-  $: filteredStations = stations.map((station) => ({
-    ...station,
-    hide: !station.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  }));
+  $: filteredStations = stations
+    .filter((station) =>
+      station.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
 </script>
 
 <section class="stations">
@@ -18,7 +19,7 @@
   {#if filteredStations.length > 0}
     <div class="station-grid">
       {#each filteredStations as station}
-        <div class="station-card {station.hide ? 'hide' : ''}">
+        <div class="station-card">
           <h3>{station.name}</h3>
           <p class="line">Lines: {station.line_id}</p>
           <ul class="amenities">
@@ -92,8 +93,8 @@
 
   .station-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
   }
 
   .station-card {
@@ -103,9 +104,6 @@
     border-radius: 10px;
     opacity: 1;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  }
-  .station-card.hide {
-    opacity: 0;
   }
 
   .station-card:hover {
@@ -152,7 +150,7 @@
 
   @media only screen and (max-width: 768px) {
     .station-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
 </style>

@@ -1,5 +1,7 @@
 <script>
   export let routes = [];
+
+  $: filteredRoutes = routes;
 </script>
 
 <section class="routes">

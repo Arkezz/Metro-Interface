@@ -1,6 +1,5 @@
 <script>
   import { enhance } from "$app/forms";
-  import { onMount } from "svelte";
   import { setAuthToken, setUserProfile, isLoggedIn } from "$lib/store.js";
   import { TextInput, PasswordInput, Button } from "$components";
 
