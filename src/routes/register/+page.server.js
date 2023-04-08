@@ -5,7 +5,7 @@ export const actions = {
     const data = Object.fromEntries(await request.formData());
     const { email, password, username } = data;
     try {
-      const result = await registerUser(email, password, username);
+      await registerUser(email, password, username);
 
       const message = `Registered successfully!`;
       return {
