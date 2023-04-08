@@ -1,6 +1,6 @@
 <script>
   export let stations = [];
-  $: searchTerm = "";
+  $: searchTerm = '';
 
   $: filteredStations = stations
     .filter((station) =>
@@ -61,7 +61,7 @@
     margin-bottom: 40px;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     padding: 15px 20px;
     border-radius: 50px;
     border: 1px solid #ccc;
@@ -70,7 +70,7 @@
     margin-right: 10px;
     transition: all 0.3s ease-in-out;
   }
-  input[type="text"]:focus {
+  input[type='text']:focus {
     width: 100%;
   }
 

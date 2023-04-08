@@ -1,4 +1,4 @@
-import { registerUser } from "$lib/api.js";
+import { registerUser } from '$lib/api.js';
 
 export const actions = {
   default: async ({ request, cookies }) => {

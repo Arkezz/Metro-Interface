@@ -1,10 +1,10 @@
 <!-- MyButton.svelte -->
 <script>
-  export let text = "";
+  export let text = '';
   export let isLoading = false;
 </script>
 
-<button aria-busy={isLoading ? "true" : "false"}>
+<button aria-busy={isLoading ? 'true' : 'false'}>
   {#if !isLoading}
     {text}
   {:else}
@@ -25,7 +25,7 @@
     cursor: pointer;
   }
 
-  button[aria-busy="true"] {
+  button[aria-busy='true'] {
     opacity: 0.5;
     cursor: default;
   }

@@ -1,4 +1,4 @@
-import { viewAllStations } from "$lib/api.js";
+import { viewAllStations } from '$lib/api.js';
 
 export const load = () => {
   const stations = viewAllStations();

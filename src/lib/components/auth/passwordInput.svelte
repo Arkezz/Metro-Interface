@@ -1,8 +1,8 @@
 <script>
-  import Svg from "$lib/icons/svgIcon.svelte";
-  import { eyeIcon, eyeOffIcon } from "$lib/svg.js";
-  export let value = "";
-  export let name = "";
+  import Svg from '$lib/icons/svgIcon.svelte';
+  import { eyeIcon, eyeOffIcon } from '$lib/svg.js';
+  export let value = '';
+  export let name = '';
   export let tooltip = true;
   export let isPasswordValid = false;
   let show_password = false;
@@ -11,10 +11,10 @@
     const { value } = event.target;
     isPasswordValid = value.length >= 8;
     event.target.style.borderColor =
-      value.length === 0 ? "#ccc" : isPasswordValid ? "green" : "red";
+      value.length === 0 ? '#ccc' : isPasswordValid ? 'green' : 'red';
   };
 
-  $: type = show_password ? "text" : "password";
+  $: type = show_password ? 'text' : 'password';
 </script>
 
 <div class="form-field">

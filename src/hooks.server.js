@@ -1,4 +1,4 @@
-import { sequence } from "@sveltejs/kit/hooks";
+import { sequence } from '@sveltejs/kit/hooks';
 // hooks.server.js
 const temp = async ({ event, resolve }) => {
   const route = event.url;
@@ -15,7 +15,7 @@ const temp = async ({ event, resolve }) => {
 };
 
 const handleSession = async ({ event, resolve }) => {
-  const session = event.cookies.get("session");
+  const session = event.cookies.get('session');
 
   if (session) {
     event.locals.session = session;

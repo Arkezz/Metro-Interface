@@ -1,15 +1,15 @@
 <script>
-  import { enhance } from "$app/forms";
-  import { TextInput, PasswordInput, Button } from "$components";
+  import { enhance } from '$app/forms';
+  import { TextInput, PasswordInput, Button } from '$components';
 
-  let email = "";
-  let username = "";
-  let password = "";
-  let message = "";
+  let email = '';
+  let username = '';
+  let password = '';
+  let message = '';
 
   const handleRegister = ({ form, action, data, cancel }) => {
     return async ({ result, update }) => {
-      if (result.type === "success") {
+      if (result.type === 'success') {
         const { toast } = result.data;
         message = toast;
       } else {

@@ -53,7 +53,7 @@
     margin-bottom: 2rem;
   }
 
-  .route-search input[type="text"] {
+  .route-search input[type='text'] {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;

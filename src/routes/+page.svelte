@@ -1,7 +1,7 @@
 <script>
-  import PlanRoute from "$lib/components/home/PlanRoute.svelte";
-  import StationSearch from "$lib/components/home/stationSearch.svelte";
-  import Tickets from "$lib/components/home/tickets.svelte";
+  import PlanRoute from '$lib/components/home/PlanRoute.svelte';
+  import StationSearch from '$lib/components/home/stationSearch.svelte';
+  import Tickets from '$lib/components/home/tickets.svelte';
 
   export let data;
   $: ({ stations, routes } = data);

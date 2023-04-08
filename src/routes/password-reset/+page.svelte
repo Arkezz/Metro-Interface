@@ -1,18 +1,18 @@
 <script>
-  import { resetPassword } from "$lib/api.js";
-  import { authToken } from "$lib/store.js";
+  import { resetPassword } from '$lib/api.js';
+  import { authToken } from '$lib/store.js';
 
-  let oldPassword = "";
-  let newPassword = "";
-  let message = "";
+  let oldPassword = '';
+  let newPassword = '';
+  let message = '';
 
   const handleResetPassword = async () => {
     try {
       await resetPassword($authToken, oldPassword, newPassword);
-      message = "Password reset successfully!";
+      message = 'Password reset successfully!';
     } catch (error) {
       message =
-        error.response?.data || "Something went wrong. Please try again later.";
+        error.response?.data || 'Something went wrong. Please try again later.';
     }
   };
 </script>

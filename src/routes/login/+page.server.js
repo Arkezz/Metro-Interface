@@ -1,5 +1,5 @@
-import { loginUser, getUserInfo } from "$lib/api.js";
-import { fail } from "@sveltejs/kit";
+import { loginUser, getUserInfo } from '$lib/api.js';
+import { fail } from '@sveltejs/kit';
 
 export const load = ({ locals }) => {
   return {
@@ -17,12 +17,12 @@ export const actions = {
     const { email, password } = data;
     try {
       const token = await loginUser(email, password);
-      cookies.set("session", token, {
-        path: "/",
+      cookies.set('session', token, {
+        path: '/',
         maxAge: 60 * 60 * 24 * 7,
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: 'strict',
       });
       const user = await getUserInfo(token);
 

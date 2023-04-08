@@ -3,7 +3,7 @@ import {
   createStation,
   updateStation,
   deleteStation,
-} from "$lib/api.js";
+} from '$lib/api.js';
 
 export const load = () => {
   const stations = viewAllStations();
@@ -16,7 +16,7 @@ export const actions = {
   create: async ({ request, cookies }) => {
     const data = Object.fromEntries(await request.formData());
     const { name, line_id } = data;
-    const token = cookies.get("session");
+    const token = cookies.get('session');
 
     try {
       const result = await createStation(token, name, line_id);
@@ -32,7 +32,7 @@ export const actions = {
   update: async ({ request, cookies }) => {
     const data = Object.fromEntries(await request.formData());
     const { name, line_id, id } = data;
-    const token = cookies.get("session");
+    const token = cookies.get('session');
 
     try {
       const result = await updateStation(token, id, name, line_id);
@@ -48,7 +48,7 @@ export const actions = {
   delete: async ({ request, cookies }) => {
     const data = Object.fromEntries(await request.formData());
     const { id } = data;
-    const token = cookies.get("session");
+    const token = cookies.get('session');
 
     try {
       const result = await deleteStation(token, id);

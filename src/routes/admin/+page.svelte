@@ -1,10 +1,10 @@
 <script>
-  import Stations from "$lib/components/admin/stations.svelte";
-  import Routes from "$lib/components/admin/routes.svelte";
+  import Stations from '$lib/components/admin/stations.svelte';
+  import Routes from '$lib/components/admin/routes.svelte';
   export let data;
   $: ({ stations, routes } = data);
 
-  let activeTab = "stations"; // default to showing the stations tab
+  let activeTab = 'stations'; // default to showing the stations tab
 
   function setActiveTab(tab) {
     activeTab = tab;
@@ -14,21 +14,21 @@
 <div class="tabs">
   <button
     class="tab"
-    class:active={activeTab === "stations"}
-    on:click={() => setActiveTab("stations")}>Stations</button
+    class:active={activeTab === 'stations'}
+    on:click={() => setActiveTab('stations')}>Stations</button
   >
   <button
     class="tab"
-    class:active={activeTab === "routes"}
-    on:click={() => setActiveTab("routes")}>Routes</button
+    class:active={activeTab === 'routes'}
+    on:click={() => setActiveTab('routes')}>Routes</button
   >
 </div>
 
 <div class="panel">
-  {#if activeTab === "stations"}
+  {#if activeTab === 'stations'}
     <Stations {stations} />
   {/if}
-  {#if activeTab === "routes"}
+  {#if activeTab === 'routes'}
     <Routes {routes} />
   {/if}
 </div>

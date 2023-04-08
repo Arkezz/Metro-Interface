@@ -1,5 +1,5 @@
 <script>
-  import { enhance } from "$app/forms";
+  import { enhance } from '$app/forms';
   export let stations = [];
 </script>
 
@@ -94,14 +94,14 @@
     margin-bottom: 10px;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
   }
 
-  button[type="submit"],
+  button[type='submit'],
   button {
     padding: 8px 16px;
     border-radius: 5px;
