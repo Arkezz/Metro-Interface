@@ -1,6 +1,6 @@
 <script>
   import { resetPassword } from '$lib/api.js';
-  import { authToken } from '$lib/store.js';
+  import { authStore } from '$lib/store.js';
 
   let oldPassword = '';
   let newPassword = '';
@@ -8,7 +8,7 @@
 
   const handleResetPassword = async () => {
     try {
-      await resetPassword($authToken, oldPassword, newPassword);
+      await resetPassword($authStore.token, oldPassword, newPassword);
       message = 'Password reset successfully!';
     } catch (error) {
       message =

@@ -1,5 +1,5 @@
 <script>
-  import { isLoggedIn } from '$lib/store.js';
+  import { authStore } from '$lib/store.js';
 </script>
 
 <div class="hero">
@@ -9,7 +9,7 @@
     <button class="dropbtn"><img src="profile.png" alt="Profile Icon" /></button
     >
     <div class="dropdown-content">
-      {#if $isLoggedIn}
+      {#if $authStore.isLoggedIn}
         <a href="/profile">Profile</a>
         <a href="/logout">Logout</a>
       {:else}

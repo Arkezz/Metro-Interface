@@ -1,10 +1,10 @@
 <script>
   import { enhance } from '$app/forms';
-  import { setAuthToken, setUserProfile, isLoggedIn } from '$lib/store.js';
+  import { authStore, setAuth } from '$lib/store.js';
   import { TextInput, PasswordInput, Button } from '$components';
 
   let email = '';
-  let password;
+  let password = '';
   let message = '';
   let isLoading = false;
   let rememberMe = false;
@@ -12,7 +12,7 @@
   let { session } = data;
 
   const handleLogin = ({ form, data, action, cancel }) => {
-    if ($isLoggedIn) {
+    if ($authStore.isLoggedIn) {
       message = 'You are already logged in!';
       cancel();
     }
@@ -24,9 +24,7 @@
       if (result.type === 'success') {
         const { user, toast } = result.data;
         message = toast;
-        setAuthToken(session);
-        setUserProfile(user);
-        $isLoggedIn = true;
+        setAuth(user, session);
       } else {
         await update();
       }

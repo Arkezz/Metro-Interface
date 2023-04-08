@@ -1,5 +1,5 @@
 import { loginUser, getUserInfo } from '$lib/api.js';
-import { fail } from '@sveltejs/kit';
+//import { fail } from '@sveltejs/kit';
 
 export const load = ({ locals }) => {
   return {

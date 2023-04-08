@@ -1,21 +1,22 @@
-import { writable, derived } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-// Define a writable store for the user's authentication token
-export const authToken = writable('');
-
-// Define a writable store for the user's profile data
-export const userProfile = writable({ username: 'Guest' });
-
-export const isLoggedIn = derived(authToken, ($authToken) => {
-  return $authToken !== '';
-});
-
-// Define a method for updating the authentication token
-export const setAuthToken = (token) => {
-  authToken.set(token);
+// Initial Auth Store State
+const initialState = {
+  isLoggedIn: false,
+  user: { username: 'Guest' },
+  token: '',
 };
 
-// Define a method for updating the user's profile data
-export const setUserProfile = (profile) => {
-  userProfile.set(profile);
+export const authStore = writable(initialState);
+
+export const setAuth = (user, token) => {
+  authStore.set({
+    isLoggedIn: true,
+    user,
+    token,
+  });
+};
+
+export const logout = () => {
+  authStore.set(initialState);
 };
