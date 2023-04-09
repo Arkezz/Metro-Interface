@@ -5,7 +5,7 @@ import path from 'path';
 const config = {
   kit: {
     alias: {
-      $components: path.resolve('./src/lib/components'),
+      $components: path.resolve('./src/components'),
     },
     adapter: adapter(),
   },

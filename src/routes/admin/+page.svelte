@@ -1,6 +1,5 @@
 <script>
-  import Stations from '$lib/components/admin/stations.svelte';
-  import Routes from '$lib/components/admin/routes.svelte';
+  import { Stations, Routes } from '$components';
   export let data;
   $: ({ stations, routes } = data);
 
@@ -19,6 +18,11 @@
   >
   <button
     class="tab"
+    class:active={activeTab === 'requests'}
+    on:click={() => setActiveTab('requests')}>Requests</button
+  >
+  <button
+    class="tab"
     class:active={activeTab === 'routes'}
     on:click={() => setActiveTab('routes')}>Routes</button
   >
@@ -30,6 +34,9 @@
   {/if}
   {#if activeTab === 'routes'}
     <Routes {routes} />
+  {/if}
+  {#if activeTab === 'requests'}
+    <p>Requests</p>
   {/if}
 </div>
 

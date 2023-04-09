@@ -24,8 +24,9 @@
       <p class="no-data">No upcoming rides.</p>
     {:else}
       <ul class="upcoming-rides">
-        <li>Flight to New York (April 15, 2023) <button>Cancel</button></li>
-        <li>Train to Boston (April 20, 2023) <button>Cancel</button></li>
+        {#each upcoming as ride}
+          <li>{ride.name} ({ride.date}) <button>Cancel</button></li>
+        {/each}
       </ul>
     {/if}
     <h2>Completed Rides:</h2>
@@ -33,8 +34,9 @@
       <p class="no-data">No completed rides.</p>
     {:else}
       <ul class="completed-rides">
-        <li>Flight to Los Angeles (April 1, 2023)</li>
-        <li>Bus to San Francisco (March 20, 2023)</li>
+        {#each completed as ride}
+          <li>{ride.name} ({ride.date})</li>
+        {/each}
       </ul>
     {/if}
   </div>
@@ -51,6 +53,7 @@
   }
   h1 {
     margin-top: 0;
+    text-align: center;
   }
   label {
     display: block;
