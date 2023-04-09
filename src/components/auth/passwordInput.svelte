@@ -1,5 +1,5 @@
 <script>
-  import Svg from '$lib/icons/svgIcon.svelte';
+  import { Svg } from '$components';
   import { eyeIcon, eyeOffIcon } from '$lib/svg.js';
   export let value = '';
   export let name = '';
