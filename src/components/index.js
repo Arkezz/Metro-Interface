@@ -7,3 +7,4 @@ export { default as PlanRoute } from '$components/home/planRoute.svelte';
 export { default as Routes } from '$components/admin/routes.svelte';
 export { default as Tickets } from '$components/home/tickets.svelte';
 export { default as Svg } from '$components/icons/svgIcon.svelte';
+export { default as Requests } from '$components/admin/requests.svelte';

@@ -1,12 +1,17 @@
 <script>
   export let stations = [];
   $: searchTerm = '';
+  $: currentPage = 0;
+  $: stationsPerPage = 3;
 
   $: filteredStations = stations
     .filter((station) =>
       station.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(currentPage * stationsPerPage, (currentPage + 1) * stationsPerPage);
+
+  $: totalPages = Math.ceil(stations.length / stationsPerPage);
 </script>
 
 <section class="stations">
@@ -29,6 +34,19 @@
           </ul>
         </div>
       {/each}
+    </div>
+    <div class="pagination">
+      <button
+        class="btn btn-secondary"
+        on:click={() => currentPage--}
+        disabled={currentPage === 0}>Previous</button
+      >
+      <p>Page {currentPage + 1} of {totalPages}</p>
+      <button
+        class="btn btn-secondary"
+        on:click={() => currentPage++}
+        disabled={currentPage === totalPages - 1}>Next</button
+      >
     </div>
   {:else}
     <p class="no-stations">No stations found.</p>
@@ -152,5 +170,40 @@
     .station-grid {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .pagination p {
+    font-size: 1.2rem;
+    margin: 0 20px;
+    color: #666;
+  }
+
+  .pagination button {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .pagination button:hover {
+    background-color: #444;
+    transform: scale(1.05);
+  }
+
+  .pagination button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 </style>

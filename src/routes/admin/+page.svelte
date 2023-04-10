@@ -1,7 +1,7 @@
 <script>
-  import { Stations, Routes } from '$components';
+  import { Stations, Routes, Requests } from '$components';
   export let data;
-  $: ({ stations, routes } = data);
+  $: ({ stations, routes, requests } = data);
 
   let activeTab = 'stations'; // default to showing the stations tab
 
@@ -36,7 +36,7 @@
     <Routes {routes} />
   {/if}
   {#if activeTab === 'requests'}
-    <p>Requests</p>
+    <Requests {requests} />
   {/if}
 </div>
 
