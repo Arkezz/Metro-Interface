@@ -1,5 +1,5 @@
 import { loginUser, getUserInfo } from '$lib/api.js';
-//import { fail } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 export const load = ({ locals }) => {
   return {
@@ -35,7 +35,8 @@ export const actions = {
         toast: message,
       };
     } catch (error) {
-      console.log(error.response.data);
+      const message = error.response.data;
+      return fail(401, message);
     }
   },
 };

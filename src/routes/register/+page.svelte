@@ -12,6 +12,8 @@
       if (result.type === 'success') {
         const { toast } = result.data;
         message = toast;
+      } else if (result.type === 'failure') {
+        message = result.data;
       } else {
         update();
       }

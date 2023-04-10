@@ -25,6 +25,8 @@
         const { user, toast } = result.data;
         message = toast;
         setAuth(user, session);
+      } else if (result.type === 'failure') {
+        message = result.data;
       } else {
         await update();
       }

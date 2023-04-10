@@ -1,7 +1,8 @@
 import { registerUser } from '$lib/api.js';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
-  default: async ({ request, cookies }) => {
+  default: async ({ request }) => {
     const data = Object.fromEntries(await request.formData());
     const { email, password, username } = data;
     try {
@@ -13,9 +14,7 @@ export const actions = {
       };
     } catch (error) {
       const message = error.response.data;
-      return {
-        toast: message,
-      };
+      return fail(401, message);
     }
   },
 };
