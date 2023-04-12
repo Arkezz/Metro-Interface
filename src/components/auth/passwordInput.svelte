@@ -5,7 +5,7 @@
   export let name = '';
   export let tooltip = true;
   export let isPasswordValid = false;
-  let show_password = false;
+  let showPassword = false;
 
   const handleInput = (event) => {
     const { value } = event.target;
@@ -14,7 +14,7 @@
       value.length === 0 ? '#ccc' : isPasswordValid ? 'green' : 'red';
   };
 
-  $: type = show_password ? 'text' : 'password';
+  $: type = showPassword ? 'text' : 'password';
 </script>
 
 <div class="form-field">
@@ -28,8 +28,8 @@
       on:input={handleInput}
       required
     />
-    <button type="button" on:click={() => (show_password = !show_password)}>
-      <Svg d={show_password ? eyeOffIcon : eyeIcon} size="24" />
+    <button type="button" on:click={() => (showPassword = !showPassword)}>
+      <Svg d={showPassword ? eyeOffIcon : eyeIcon} size="24" />
     </button>
   </div>
   {#if tooltip}

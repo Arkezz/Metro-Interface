@@ -1,4 +1,5 @@
 <script>
+  import { enhance } from '$app/forms';
   import { resetPassword } from '$lib/api.js';
   import { authStore } from '$lib/store.js';
 
@@ -6,39 +7,43 @@
   let newPassword = '';
   let message = '';
 
-  const handleResetPassword = async () => {
-    try {
-      await resetPassword($authStore.token, oldPassword, newPassword);
-      message = 'Password reset successfully!';
-    } catch (error) {
-      message =
-        error.response?.data || 'Something went wrong. Please try again later.';
-    }
-  };
+  const handleResetPassword = async () => {};
 </script>
 
-<div class="password-reset-form">
-  <h1>Reset Password</h1>
-  <form>
-    <div class="form-field">
-      <label for="old-password">Old Password:</label>
-      <input type="password" id="old-password" bind:value={oldPassword} />
+<form method="POST" use:enhance={handleResetPassword}>
+  <div class="password-reset-form">
+    <h1>Reset Password</h1>
+    <form>
+      <div class="form-field">
+        <label for="old-password">Old Password:</label>
+        <input
+          type="password"
+          name="oldPassword"
+          id="old-password"
+          bind:value={oldPassword}
+        />
+      </div>
+      <div class="form-field">
+        <label for="new-password">New Password:</label>
+        <input
+          type="password"
+          name="newPassword"
+          id="new-password"
+          bind:value={newPassword}
+        />
+      </div>
+      <div class="form-field">
+        <button>Reset Password</button>
+      </div>
+    </form>
+    <div class="form-message">
+      <p>{message}</p>
     </div>
-    <div class="form-field">
-      <label for="new-password">New Password:</label>
-      <input type="password" id="new-password" bind:value={newPassword} />
+    <div class="form-options">
+      <a href="/login">Already have an account? Login here</a>
     </div>
-    <div class="form-field">
-      <button on:click={handleResetPassword}>Reset Password</button>
-    </div>
-  </form>
-  <div class="form-message">
-    <p>{message}</p>
   </div>
-  <div class="form-options">
-    <a href="/login">Already have an account? Login here</a>
-  </div>
-</div>
+</form>
 
 <style>
   .password-reset-form {
