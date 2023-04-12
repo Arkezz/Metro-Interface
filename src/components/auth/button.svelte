@@ -1,4 +1,3 @@
-<!-- MyButton.svelte -->
 <script>
   export let text = '';
   export let isLoading = false;

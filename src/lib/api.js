@@ -141,17 +141,18 @@ export const checkPricing = async (routeId, ticketType) => {
   return response.data.price;
 };
 
+//Senior Requests
+
 export const viewSeniorRequests = async () => {
   const response = await axios.get(`${API_URL}/view-senior-requests`);
   return response.data.requests;
 };
 
-export const uploadSeniorRequest = async (token, name, age) => {
+export const uploadSeniorRequest = async (token, idImageUrl) => {
   const response = await axios.post(
     `${API_URL}/upload-senior-request`,
     {
-      name,
-      age,
+      idImageUrl,
     },
     {
       headers: {
@@ -176,6 +177,8 @@ export const approveSeniorRequest = async (token, requestId) => {
   );
   return response.data.message;
 };
+
+///
 
 export const viewAllStations = async () => {
   const response = await axios.get(`${API_URL}/view-all-stations`);

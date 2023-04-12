@@ -3,12 +3,15 @@ import {
   createStation,
   updateStation,
   deleteStation,
+  viewSeniorRequests,
 } from '$lib/api.js';
 
 export const load = () => {
   const stations = viewAllStations();
+  const seniorRequests = viewSeniorRequests();
   return {
     stations,
+    seniorRequests,
   };
 };
 
